@@ -1,0 +1,19 @@
+{
+  "name": "pinyinify",
+  "version": "0.1.0",
+  "description": "Converter from Chinese characters to pinyin.",
+  "main": "pinyinify.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "pinyin",
+    "chinese"
+  ],
+  "author": "Peter Olson",
+  "license": "ISC",
+  "dependencies": {
+    "nodejieba": "^2.2.4",
+    "pinyin": "^2.8.0"
+  }
+}
