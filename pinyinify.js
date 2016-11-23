@@ -2,7 +2,7 @@ let pinyin = require("pinyin"),
     nodejieba = require("nodejieba"),
     pinyinDict = require("./pinyinDict");
 
-let punctuation = new Set("！？，。：；’”）%");
+let punctuation = new Set("！？，。：；’”）%~@#^&*");
 
 function pinyinify(text) {
     text = spacePunctuation(text);
@@ -30,8 +30,8 @@ function pinyinify(text) {
 }
 
 function spacePunctuation(text) {
-    return text.replace(/([！？，。：；’”%）])([^ ])/g, (x,p,n) => p + " " + n)
-        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}%])/g, (x,p,n) => p + " " + n);
+    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x,p,n) => p + " " + n)
+        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x,p,n) => p + " " + n);
 }
 
 function fixPunctuation(text) {
