@@ -1,8 +1,10 @@
 {
   "name": "pinyinify",
   "version": "0.1.0",
+  "author": "Peter Olson <peter.e.c.olson+npm@gmail.com>",
   "description": "Converter from Chinese characters to pinyin.",
-  "main": "pinyinify.js",
+  "license": "Unlicense",
+  "main": "./pinyinify",
   "scripts": {
     "test": "jasmine"
   },
@@ -10,13 +12,14 @@
     "pinyin",
     "chinese"
   ],
-  "author": "Peter Olson",
-  "license": "ISC",
   "dependencies": {
     "nodejieba": "^2.2.4",
     "pinyin": "^2.8.0"
   },
   "devDependencies": {
     "jasmine": "^2.5.2"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   }
 }
