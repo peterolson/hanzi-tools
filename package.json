@@ -1,10 +1,14 @@
 {
   "name": "pinyinify",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Peter Olson <peter.e.c.olson+npm@gmail.com>",
   "description": "Converter from Chinese characters to pinyin.",
   "license": "Unlicense",
   "main": "./pinyinify",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:peterolson/pinyinify.git"
+  },
   "scripts": {
     "test": "jasmine"
   },
