@@ -4,10 +4,11 @@ let pinyin = require("pinyin"),
 
 let punctuation = new Set("！？，。：；’”）%~@#^&*");
 
-function pinyinify(text) {
+function pinyinify(text, isDetailed) {
     text = spacePunctuation(text);
     let cut = nodejieba.cut(text);
     let out = "", prevIsCharacter = false;
+    let pinyinSegments = [];
     cut.forEach((text) => {
         let word;
         if (pinyinDict[text]) {
@@ -19,6 +20,7 @@ function pinyinify(text) {
             });
             word = arr.map((x) => x[0]).join("");
         }
+        pinyinSegments.push(word);
         if (prevIsCharacter && ! punctuation.has(text)) {
             out += " " + word;
         } else {
@@ -26,6 +28,13 @@ function pinyinify(text) {
         }
         prevIsCharacter = word !== text;
     });
+    if(isDetailed) {
+        return {
+            segments: cut.filter(x => x.trim()),
+            pinyinSegments: pinyinSegments.filter(x => x.trim()).map(fixPunctuation),
+            pinyin: fixPunctuation(out)
+        };
+    }
     return fixPunctuation(out);
 }
 
