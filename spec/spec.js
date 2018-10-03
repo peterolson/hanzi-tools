@@ -46,6 +46,20 @@ describe("Pinyinify", () => {
         let details = pinyinify("他们为什么没有这样做？这真是他所想要的吗？", true);
         expect(details.segments).toEqual(['他们', '为什么', '没有', '这样', '做', '？', '这', '真是', '他', '所', '想要','的', '吗', '？']);
         expect(details.pinyinSegments).toEqual(['tāmen', 'wèishénme', 'méiyǒu', 'zhèyàng', 'zuò', '?', 'zhè', 'zhēnshi', 'tā', 'suǒ', 'xiǎngyào', 'de', 'ma', '?']);
+        expect(details.pinyinSegmentsSyllables).toEqual([ [ 'tā', 'men' ],
+        [ 'wèi', 'shén', 'me' ],
+        [ 'méi', 'yǒu' ],
+        [ 'zhè', 'yàng' ],
+        [ 'zuò' ],
+        [ '?' ],
+        [ 'zhè' ],
+        [ 'zhēn', 'shi' ],
+        [ 'tā' ],
+        [ 'suǒ' ],
+        [ 'xiǎng', 'yào' ],
+        [ 'de' ],
+        [ 'ma' ],
+        [ '?' ] ]);
         expect(details.pinyin).toEqual('tāmen wèishénme méiyǒu zhèyàng zuò? zhè zhēnshi tā suǒ xiǎngyào de ma?');
     });
 });

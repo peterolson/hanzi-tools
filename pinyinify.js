@@ -9,16 +9,20 @@ function pinyinify(text, isDetailed) {
     let cut = nodejieba.cut(text);
     let out = "", prevIsCharacter = false;
     let pinyinSegments = [];
+    let pinyinSegmentsSyllables = [];
     cut.forEach((text) => {
         let word;
         if (pinyinDict[text]) {
             word = pinyinDict[text];
+            pinyinSegmentsSyllables.push(segmentSyllables(text, word));
         } else {
             let arr = pinyin(text, {
                 heteronym: true,
                 segment: true
             });
-            word = arr.map((x) => x[0]).join("");
+            let syllables = arr.map((x) => x[0]);
+            pinyinSegmentsSyllables.push(syllables);
+            word = syllables.join("");
         }
         pinyinSegments.push(word);
         if (prevIsCharacter && ! punctuation.has(text)) {
@@ -32,10 +36,28 @@ function pinyinify(text, isDetailed) {
         return {
             segments: cut.filter(x => x.trim()),
             pinyinSegments: pinyinSegments.filter(x => x.trim()).map(fixPunctuation),
+            pinyinSegmentsSyllables: pinyinSegmentsSyllables.map(x => x.filter(x => x.trim()).map(fixPunctuation)).filter(x => x.length),
             pinyin: fixPunctuation(out)
         };
     }
     return fixPunctuation(out);
+}
+
+function segmentSyllables(text, word) {
+    let textReadings = pinyin(text, {heteronym: true });
+    let segments = [];
+    for(let syllableReadings of textReadings) {
+        let bestReading = syllableReadings[0];
+        for(let reading of syllableReadings) {
+            if(word.startsWith(reading)) {
+                bestReading = reading;
+                break;
+            }
+        }
+        segments.push(word.slice(0, bestReading.length));
+        word = word.slice(bestReading.length);
+    }
+    return segments;
 }
 
 function spacePunctuation(text) {
@@ -56,7 +78,9 @@ function fixPunctuation(text) {
         "“": "``",
         "”": "\"",
         "（": "(",
-        "）": ")"
+        "）": ")",
+        "【": "[",
+        "】": "]"
     };
     let newString = "";
     for (let char of text) {

@@ -22,5 +22,6 @@
     // { 
     //   segments: ['人人', '生而自由', '，', '在', '尊严', '和', '权利', '上', '一律平等', '。'],
     //   pinyinSegments: ['rénrén', 'shēngérzìyóu', ',', 'zài', 'zūnyán', 'hé', 'quánlì', 'shàng', 'yīlǜpíngděng', '.'],
+    //   pinyinSegmentsSyllables: [['rén', 'rén'], ['shēng', 'ér', 'zì', 'yóu'], [','], ['zài'], ['zūn', 'yán'], ['hé'], ['quán', 'lì'], ['shàng'], ['yī', 'lǜ', 'píng', 'děng']],
     //   pinyin: 'rénrén shēngérzìyóu, zài zūnyán hé quánlì shàng yīlǜpíngděng.' 
     // }
