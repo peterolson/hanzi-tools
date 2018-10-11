@@ -50,7 +50,8 @@ let pinyinDict = {
   "肚": "dù",
   "霍": "huò",
   "云": "yún",
-  //"个": "ge",
+  "起来": "qǐlái",
+  // end manually modified pinyin
   "21三体综合症": "èrshíyīsāntǐzōnghézhèng",
   "3C": "sānC",
   "A": "A",
@@ -92977,7 +92978,6 @@ let pinyinDict = {
   "起": "qǐ",
   "起亚": "Qǐyà",
   "起伏": "qǐfú",
-  "起来": "qilai",
   "起价": "qǐjià",
   "起先": "qǐxiān",
   "起初": "qǐchū",
