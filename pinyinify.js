@@ -11,28 +11,18 @@ function pinyinify(text, isDetailed) {
     let pinyinSegments = [];
     let pinyinSegmentsSyllables = [];
     cut.forEach((text) => {
-        let word;
-        if (pinyinDict[text]) {
-            word = pinyinDict[text];
-            pinyinSegmentsSyllables.push(segmentSyllables(text, word));
-        } else {
-            let arr = pinyin(text, {
-                heteronym: true,
-                segment: true
-            });
-            let syllables = arr.map((x) => x[0]);
-            pinyinSegmentsSyllables.push(syllables);
-            word = syllables.join("");
-        }
+        let { word, segments } = pinyinifyWord(text);
+        pinyinSegmentsSyllables.push(segments);
+
         pinyinSegments.push(word);
-        if (prevIsCharacter && ! punctuation.has(text)) {
+        if (prevIsCharacter && !punctuation.has(text)) {
             out += " " + word;
         } else {
             out += word;
         }
         prevIsCharacter = word !== text;
     });
-    if(isDetailed) {
+    if (isDetailed) {
         return {
             segments: cut.filter(x => x.trim()),
             pinyinSegments: pinyinSegments.filter(x => x.trim()).map(fixPunctuation),
@@ -43,13 +33,58 @@ function pinyinify(text, isDetailed) {
     return fixPunctuation(out);
 }
 
-function segmentSyllables(text, word) {
-    let textReadings = pinyin(text, {heteronym: true });
+function pinyinifyWord(text) {
+    if (!text.length) {
+        return { word: "", segments: [] };
+    }
+    if (text.length === 1) {
+        return pinyinifyChar(text);
+    }
     let segments = [];
-    for(let syllableReadings of textReadings) {
+    let word;
+    let i;
+    for (i = text.length; i > 0; i--) {
+        let chunk = text.slice(0, i);
+        if (pinyinDict[chunk]) {
+            word = pinyinDict[chunk];
+            segments = segmentSyllables(chunk, word);
+            break;
+        }
+    }
+    if (i === text.length) {
+        return { word, segments };
+    }
+    if (i === 0) {
+        ({ word, segments } = pinyinifyChar(text[0]));
+        i++;
+    }
+
+    let { word: remainderWord, segments: remainderSegments } = pinyinifyWord(text.slice(i));
+    return { word: word + remainderWord, segments: segments.concat(remainderSegments) };
+}
+
+function pinyinifyChar(text) {
+    let word = pinyinDict[text];
+    if (word) {
+        return { word, segments: [word] }
+    }
+    let arr = pinyin(text, {
+        heteronym: true,
+        segment: true
+    });
+    let syllables = arr.map((x) => x[0]);
+    word = syllables.join("");
+    return { word, segments: syllables };
+}
+
+function segmentSyllables(text, word) {
+    let textReadings = pinyin(text, { heteronym: true });
+    let segments = [];
+    for (let syllableReadings of textReadings) {
         let bestReading = syllableReadings[0];
-        for(let reading of syllableReadings) {
-            if(word.startsWith(reading)) {
+        for (let reading of syllableReadings) {
+            if (!word) console.log("HEY!", text, word, reading);
+            if (word.startsWith(reading)) {
                 bestReading = reading;
                 break;
             }
@@ -61,8 +96,8 @@ function segmentSyllables(text, word) {
 }
 
 function spacePunctuation(text) {
-    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x,p,n) => p + " " + n)
-        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x,p,n) => p + " " + n);
+    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x, p, n) => p + " " + n)
+        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x, p, n) => p + " " + n);
 }
 
 function fixPunctuation(text) {
