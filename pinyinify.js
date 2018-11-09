@@ -9,60 +9,72 @@ function pinyinify(text, isDetailed) {
     let cut = nodejieba.cut(text);
     let out = "", prevIsCharacter = false;
     let pinyinSegments = [];
-    let pinyinSegmentsSyllables = [];
     cut.forEach((text) => {
-        let word;
-        if (pinyinDict[text]) {
-            word = pinyinDict[text];
-            pinyinSegmentsSyllables.push(segmentSyllables(text, word));
-        } else {
-            let arr = pinyin(text, {
-                heteronym: true,
-                segment: true
-            });
-            let syllables = arr.map((x) => x[0]);
-            pinyinSegmentsSyllables.push(syllables);
-            word = syllables.join("");
-        }
+        let word = pinyinifyWord(text);
         pinyinSegments.push(word);
-        if (prevIsCharacter && ! punctuation.has(text)) {
+        if (prevIsCharacter && !punctuation.has(text)) {
             out += " " + word;
         } else {
             out += word;
         }
         prevIsCharacter = word !== text;
     });
-    if(isDetailed) {
+    if (isDetailed) {
+        pinyinSegments = pinyinSegments.filter(x => x.trim()).map(fixPunctuation);
         return {
             segments: cut.filter(x => x.trim()),
-            pinyinSegments: pinyinSegments.filter(x => x.trim()).map(fixPunctuation),
-            pinyinSegmentsSyllables: pinyinSegmentsSyllables.map(x => x.filter(x => x.trim()).map(fixPunctuation)).filter(x => x.length),
+            pinyinSegments,
+            pinyinSegmentsSyllables: pinyinSegments.map(segment => segment.split("\u200B")),
             pinyin: fixPunctuation(out)
         };
     }
     return fixPunctuation(out);
 }
 
-function segmentSyllables(text, word) {
-    let textReadings = pinyin(text, {heteronym: true });
-    let segments = [];
-    for(let syllableReadings of textReadings) {
-        let bestReading = syllableReadings[0];
-        for(let reading of syllableReadings) {
-            if(word.startsWith(reading)) {
-                bestReading = reading;
-                break;
-            }
-        }
-        segments.push(word.slice(0, bestReading.length));
-        word = word.slice(bestReading.length);
+function pinyinifyWord(text) {
+    if (!text.length) {
+        return { word: "", segments: [] };
     }
-    return segments;
+    if (text.length === 1) {
+        return pinyinifyChar(text);
+    }
+    let word;
+    let i;
+    for (i = text.length; i > 0; i--) {
+        let chunk = text.slice(0, i);
+        if (pinyinDict[chunk]) {
+            word = pinyinDict[chunk];
+            break;
+        }
+    }
+    if (i === text.length) {
+        return word;
+    }
+    if (i === 0) {
+        word = pinyinifyChar(text[0]);
+        i++;
+    }
+
+    let remainderWord = pinyinifyWord(text.slice(i));
+    return word + remainderWord;
+}
+
+function pinyinifyChar(text) {
+    let word = pinyinDict[text];
+    if (word) {
+        return word;
+    }
+    let arr = pinyin(text, {
+        heteronym: true,
+        segment: true
+    });
+    let syllables = arr.map((x) => x[0]);
+    return syllables.join("\u200B");
 }
 
 function spacePunctuation(text) {
-    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x,p,n) => p + " " + n)
-        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x,p,n) => p + " " + n);
+    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x, p, n) => p + " " + n)
+        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x, p, n) => p + " " + n);
 }
 
 function fixPunctuation(text) {
