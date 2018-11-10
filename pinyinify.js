@@ -9,8 +9,8 @@ function pinyinify(text, isDetailed) {
     let cut = nodejieba.cut(text);
     let out = "", prevIsCharacter = false;
     let pinyinSegments = [];
-    cut.forEach((text) => {
-        let word = pinyinifyWord(text);
+    cut.forEach((text, i, cuts) => {
+        let word = pinyinifyWord(text, cuts, i);
         pinyinSegments.push(word);
         if (prevIsCharacter && !punctuation.has(text)) {
             out += " " + word;
@@ -31,12 +31,12 @@ function pinyinify(text, isDetailed) {
     return fixPunctuation(out);
 }
 
-function pinyinifyWord(text) {
+function pinyinifyWord(text, cuts, cutIndex) {
     if (!text.length) {
         return { word: "", segments: [] };
     }
     if (text.length === 1) {
-        return pinyinifyChar(text);
+        return pinyinifyChar(text, cuts, cutIndex);
     }
     let word;
     let i;
@@ -51,15 +51,19 @@ function pinyinifyWord(text) {
         return word;
     }
     if (i === 0) {
-        word = pinyinifyChar(text[0]);
+        word = pinyinifyChar(text[0], cuts, cutIndex);
         i++;
     }
 
-    let remainderWord = pinyinifyWord(text.slice(i));
-    return word + remainderWord;
+    let remainderWord = pinyinifyWord(text.slice(i), cuts, cutIndex);
+    return word + "\u200B" + remainderWord;
 }
 
-function pinyinifyChar(text) {
+function pinyinifyChar(text, cuts, cutIndex) {
+    let disambiguatedChar = decideAmbiguousChar(text, cuts, cutIndex);
+    if (disambiguatedChar) {
+        return disambiguatedChar;
+    }
     let word = pinyinDict[text];
     if (word) {
         return word;
@@ -70,6 +74,27 @@ function pinyinifyChar(text) {
     });
     let syllables = arr.map((x) => x[0]);
     return syllables.join("\u200B");
+}
+
+function decideAmbiguousChar(char, cuts, cutIndex) {
+    let previousText = cuts.slice(Math.max(0, cutIndex - 10), cutIndex);
+    let afterText = cuts.slice(cutIndex + 1, cutIndex + 10);
+    switch (char) {
+        case "觉":
+        case "覺":
+            if (previousText.join("").includes("睡")) return "jiào";
+            return "jué";
+        case "长":
+        case "長":
+            // zhǎng has higher frequency due to compond words, 
+            // but cháng is more common as an individual character.
+            return "cháng";
+        case "得":
+        // leaving placeholder, will require further analysis
+        case "还":
+        case "還":
+        // leaving placeholder, will require further analysis
+    }
 }
 
 function spacePunctuation(text) {

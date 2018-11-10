@@ -1,6 +1,6 @@
 {
   "name": "pinyinify",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "author": "Peter Olson <peter.e.c.olson+npm@gmail.com>",
   "description": "Converter from Chinese characters to pinyin.",
   "license": "Unlicense",

@@ -26,11 +26,11 @@ describe("Pinyinify", () => {
 
     it("selects the correct pronunciation for 多音字", () => {
         expect("我受不了了").becomes("wǒ shòu​bù​liǎo le");
-        expect("我觉得睡觉是很重要的。我睡了一个好觉有很好的感觉。").becomes("wǒ jué​de shuì​jiào shì hěn zhòng​yào de. wǒ shuì le yīgè hǎo jué yǒu hěn hǎo de gǎn​jué.");
+        expect("我觉得睡觉是很重要的。我睡了一个好觉有很好的感觉。").becomes("wǒ jué​de shuì​jiào shì hěn zhòng​yào de. wǒ shuì le yī​gè hǎo jiào yǒu hěn hǎo de gǎn​jué.");
         expect("你看她干吗？她是你的女朋友吗？").becomes("nǐ kàn tā gàn​má? tā shì nǐ de nǚ​péng​you ma?");
-        expect("他给我发了个短信：“我长大的时候我的头发很长。但是现在我喜欢理发。”").becomes("tā gěiwǒfā le gè duǎn​xìn: ``wǒ zhǎng​dà de shí​hou wǒ de tóu​fa hěn zhǎng. dàn​shì xiàn​zài wǒ xǐ​huan lǐ​fà.\"");
+        expect("他给我发了个短信：“我长大的时候我的头发很长。但是现在我喜欢理发。”").becomes("tā gěi​wǒ​fā le gè duǎn​xìn: ``wǒ zhǎng​dà de shí​hou wǒ de tóu​fa hěn cháng. dàn​shì xiàn​zài wǒ xǐ​huan lǐ​fà.\"");
         expect("我们都想去首都玩。").becomes("wǒ​men dōu xiǎng qù shǒu​dū wán.");
-        expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiàoshí bù shuì​jiào.");
+        expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiào​shí bù shuì​jiào.");
     });
 
     it("converts punctuation and spacing", () => {
@@ -39,7 +39,7 @@ describe("Pinyinify", () => {
     });
 
     it("doesn't mangle numbers or non-Chinese text", () => {
-        expect("我有2个。他有540！50%的意思是百分之五十。").becomes("wǒ yǒu 2 gè. tā yǒu 540! 50% de yì​si shì bǎi​fēn​zhīwǔ​shí.");
+        expect("我有2个。他有540！50%的意思是百分之五十。").becomes("wǒ yǒu 2 gè. tā yǒu 540! 50% de yì​si shì bǎi​fēn​zhī​wǔ​shí.");
         expect("我叫Dr. Smith。他是Señor López。他是Владимир Влидимирович给我们介绍的。", "wǒ jiào Dr. Smith. tā shì Señor López. tā shì Владимир Влидимирович gěi wǒmen jièshào de.");
     });
 
@@ -62,5 +62,16 @@ describe("Pinyinify", () => {
         ['ma'],
         ['?']]);
         expect(details.pinyin).toEqual('tā​men wèi​shén​me méi​yǒu zhè​yàng zuò? zhè zhēn​shi tā suǒ xiǎng​yào de ma?');
+
+
+        details = pinyinify("我们是五个太好的门。", true);
+        expect(details.pinyinSegmentsSyllables).toEqual([['wǒ', 'men'],
+        ['shì'],
+        ['wǔ', 'gè'],
+        ['tài'],
+        ['hǎo'],
+        ['de'],
+        ['mén'],
+        ['.']]);
     });
 });
