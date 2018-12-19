@@ -1,10 +1,10 @@
 {
-  "name": "pinyinify",
-  "version": "1.0.7",
+  "name": "hanzi-tools",
+  "version": "1.1.0",
   "author": "Peter Olson <peter.e.c.olson+npm@gmail.com>",
-  "description": "Converter from Chinese characters to pinyin.",
+  "description": "Converts from Chinese characters to pinyin, between simplified and traditional, and does word segmentation.",
   "license": "Unlicense",
-  "main": "./pinyinify",
+  "main": "./index",
   "repository": {
     "type": "git",
     "url": "git@github.com:peterolson/pinyinify.git"
@@ -14,7 +14,16 @@
   },
   "keywords": [
     "pinyin",
-    "chinese"
+    "chinese",
+    "simplified",
+    "traditional",
+    "convert",
+    "segment",
+    "汉字",
+    "拼音",
+    "简体",
+    "繁体",
+    "分词"
   ],
   "dependencies": {
     "nodejieba": "^2.2.4",
