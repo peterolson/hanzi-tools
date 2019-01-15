@@ -35,7 +35,11 @@ describe("Pinyinify", () => {
 
     it("converts punctuation and spacing", () => {
         expect("什么？！我绝对 不 想 去！！你问我“你想去吗”干吗 不要问我了。哎哟（哈哈）晚安~")
-            .becomes("shén​me?! wǒ jué​duì  bù  xiǎng  qù!! nǐ wèn wǒ ``nǐ xiǎng qù ma\" gàn​má  bù​yào wèn wǒ le. āi​yō (hā​hā) wǎn​ān~");
+            .becomes("shén​me?! wǒ jué​duì  bù  xiǎng  qù!! nǐ wèn wǒ ``nǐ xiǎng qù ma\" gàn​má  bù​yào wèn wǒ le. āi​yō (hā​hā) wǎn​'ān~");
+    });
+
+    it("add apostrophe when needed", () => {
+        expect("西安").becomes("Xī​'ān");
     });
 
     it("doesn't mangle numbers or non-Chinese text", () => {
