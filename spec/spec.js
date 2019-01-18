@@ -31,6 +31,7 @@ describe("Pinyinify", () => {
         expect("他给我发了个短信：“我长大的时候我的头发很长。但是现在我喜欢理发。”").becomes("tā gěi wǒ fā le gè duǎn​xìn: ``wǒ zhǎng​dà de shí​hou wǒ de tóu​fa hěn cháng. dàn​shì xiàn​zài wǒ xǐ​huan lǐ​fà.\"");
         expect("我们都想去首都玩。").becomes("wǒ​men dōu xiǎng qù shǒu​dū wán.");
         expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiào shí bù shuì​jiào.");
+        expect("你找到什么吃的了么？").becomes("nǐ zhǎo​dào shén​me chī de le me?");
     });
 
     it("converts punctuation and spacing", () => {
