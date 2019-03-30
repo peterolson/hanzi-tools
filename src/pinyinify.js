@@ -4,13 +4,13 @@ let segment = require("./segment"),
     { normalizeEnglish } = require("./punctuation");
 
 function pinyinify(text, isDetailed) {
-    text = spacePunctuation(text);
     let segments = segment(text);
     let pinyinSegments = [];
     segments.forEach((text, i, segments) => {
         if (text.length === 1) pinyinSegments.push(pinyinifyChar(text, segments, i));
         else pinyinSegments.push(pinyinDict[text]);
     });
+
     let out = [];
     pinyinSegments.forEach((text, i) => {
         if (shouldPutSpaceBetween(segments[i], segments[i + 1])) {
@@ -21,8 +21,8 @@ function pinyinify(text, isDetailed) {
     });
     out = out.join("").trim();
     if (isDetailed) {
-        segments = segments.filter(x => x.trim());
-        pinyinSegments = pinyinSegments.filter(x => x.trim()).map(normalizeEnglish);
+        segments = segments;
+        pinyinSegments = pinyinSegments.map(normalizeEnglish);
         return {
             segments,
             pinyinSegments,
@@ -80,13 +80,13 @@ function shouldPutSpaceBetween(word1, word2) {
     if (!word2) return false;
     if (isCharacterText(word1) && isCharacterText(word2)) return true;
     if (isCharacterText(word1) && /[ `"'“‘\(\[（【0-9]/.test(word2)) return true;
+    let punctuationPattern = /[0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*]/;
+    let numberPattern = /[0-9]/;
+    if (numberPattern.test(word1) && numberPattern.test(word2)) return false;
+    if (punctuationPattern.test(word1) && !punctuationPattern.test(word2)) return true;
+    if (punctuationPattern.test(word1) && numberPattern.test(word2)) return true;
     return false;
 
-}
-
-function spacePunctuation(text) {
-    return text.replace(/([！？，。：；’”%）]+)([^ ！？，。：；’”%）])/g, (x, p, n) => p + " " + n)
-        .replace(/([0-9]+)([^ 0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*])/g, (x, p, n) => p + " " + n);
 }
 
 module.exports = pinyinify;

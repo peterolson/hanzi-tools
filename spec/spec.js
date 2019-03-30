@@ -48,6 +48,11 @@ describe("Pinyinify", () => {
         expect("我叫Dr. Smith。他是Señor López。他是Владимир Влидимирович给我们介绍的。", "wǒ jiào Dr. Smith. tā shì Señor López. tā shì Владимир Влидимирович gěi wǒmen jièshào de.");
     });
 
+    it("preserves spaces in input", () => {
+        let details = pinyinify(" - 你好？ 这是什么？", true);
+        expect(details.segments).toEqual([' ', '-', ' ', '你好', '？', ' ', '这', '是', '什么', '？']);
+    });
+
     it("returns detailed output when given a second parameter", () => {
         let details = pinyinify("他们为什么没有这样做？这真是他所想要的吗？", true);
         expect(details.segments).toEqual(['他们', '为什么', '没有', '这样', '做', '？', '这', '真是', '他', '所', '想要', '的', '吗', '？']);
