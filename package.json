@@ -1,6 +1,6 @@
 {
   "name": "hanzi-tools",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "author": "Peter Olson <peter.e.c.olson+npm@gmail.com>",
   "description": "Converts from Chinese characters to pinyin, between simplified and traditional, and does word segmentation.",
   "license": "Unlicense",
@@ -26,7 +26,7 @@
     "分词"
   ],
   "dependencies": {
-    "nodejieba": "^2.2.4",
+    "nodejieba": "^2.3.0",
     "pinyin": "^2.8.0"
   },
   "devDependencies": {

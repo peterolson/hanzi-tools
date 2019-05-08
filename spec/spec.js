@@ -32,6 +32,7 @@ describe("Pinyinify", () => {
         expect("我们都想去首都玩。").becomes("wǒ​men dōu xiǎng qù shǒu​dū wán.");
         expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiào shí bù shuì​jiào.");
         expect("你找到什么吃的了么？").becomes("nǐ zhǎo​dào shén​me chī de le me?");
+        expect("一个穿着神色的裤子的男人坐在火车上。").becomes("yī gè chuān zhe shén​sè de kù​zi de nán​rén zuò zài huǒ​chē shàng.");
     });
 
     it("converts punctuation and spacing", () => {
