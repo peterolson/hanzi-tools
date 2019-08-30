@@ -34,6 +34,18 @@ describe("Pinyinify", () => {
         expect("你找到什么吃的了么？").becomes("nǐ zhǎo​dào shén​me chī de le me?");
         expect("一个穿着神色的裤子的男人坐在火车上。").becomes("yī gè chuān zhe shén​sè de kù​zi de nán​rén zuò zài huǒ​chē shàng.");
         expect("东西").becomes("dōng​xi");
+        // 得
+        expect("我们得现在就谈吗？").becomes("wǒ​men děi xiàn​zài jiù tán ma?");
+        expect("你得听我的。").becomes("nǐ děi tīng wǒ de.");
+        expect("我得去。").becomes("wǒ děi qù.");
+        expect("我说得快。").becomes("wǒ shuō de kuài.");
+        expect("你们觉得我画得怎么样？").becomes("nǐ​men jué​de wǒ huà de zěn​me​yàng?");
+        // 还
+        expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
+        expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
+        expect("你还喜欢她吗？").becomes("nǐ hái xǐ​huan tā ma?");
+        expect("你得还我的东西。").becomes("nǐ děi huán wǒ de dōng​xi.");
+        expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
     });
 
     it("converts punctuation and spacing", () => {

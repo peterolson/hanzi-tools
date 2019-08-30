@@ -1,7 +1,8 @@
 let segment = require("./segment"),
     pinyin = require("pinyin"),
     { pinyinDict } = require("./pinyinDict"),
-    { normalizeEnglish } = require("./punctuation");
+    { normalizeEnglish } = require("./punctuation"),
+    tag = require("nodejieba").tag;
 
 function pinyinify(text, isDetailed) {
     let segments = segment(text);
@@ -53,6 +54,7 @@ function pinyinifyChar(text, cuts, cutIndex) {
 function decideAmbiguousChar(char, cuts, cutIndex) {
     let previousText = cuts.slice(Math.max(0, cutIndex - 10), cutIndex);
     let afterText = cuts.slice(cutIndex + 1, cutIndex + 10);
+    let nextTags;
     switch (char) {
         case "觉":
         case "覺":
@@ -64,10 +66,29 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             // but cháng is more common as an individual character.
             return "cháng";
         case "得":
-        // leaving placeholder, will require further analysis
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length) {
+                let afterTag = nextTags[0].tag;
+                if (nextTags[0].word === "还" || nextTags[0].word === "還") {
+                    if (nextTags[1] && nextTags[1].tag[0] === "r" || nextTags[1].tag[0] === "n") {
+                        return "děi";
+                    }
+                }
+                if (afterTag[0] === "t" || afterTag[0] === "v") {
+                    return "děi";
+                }
+            }
+            break;
         case "还":
         case "還":
-        // leaving placeholder, will require further analysis
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length) {
+                let afterTag = nextTags[0].tag;
+                if (afterTag[0] === "r" || afterTag[0] === "n") {
+                    return "huán";
+                }
+            }
+            break;
     }
 }
 
