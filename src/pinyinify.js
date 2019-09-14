@@ -54,7 +54,7 @@ function pinyinifyChar(text, cuts, cutIndex) {
 function decideAmbiguousChar(char, cuts, cutIndex) {
     let previousText = cuts.slice(Math.max(0, cutIndex - 10), cutIndex);
     let afterText = cuts.slice(cutIndex + 1, cutIndex + 10);
-    let nextTags;
+    let nextTags, prevTags;
     switch (char) {
         case "觉":
         case "覺":
@@ -87,6 +87,13 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (afterTag[0] === "r" || afterTag[0] === "n") {
                     return "huán";
                 }
+            }
+            break;
+        case "行":
+            prevTags = tag(previousText.join(""));
+            nextTags = tag(afterText.join(""));
+            if (prevTags.length && prevTags[prevTags.length - 1].tag === "m") {
+                return "háng";
             }
             break;
     }

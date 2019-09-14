@@ -46,6 +46,10 @@ describe("Pinyinify", () => {
         expect("你还喜欢她吗？").becomes("nǐ hái xǐ​huan tā ma?");
         expect("你得还我的东西。").becomes("nǐ děi huán wǒ de dōng​xi.");
         expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
+
+        expect("行了吗？").becomes("xíng le ma?");
+        expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
+        expect("几行代码？两行代码。行还是不行？行！").becomes("jǐ háng dài​mǎ? liǎng háng dài​mǎ. xíng hái​shi bù​xíng? xíng!");
     });
 
     it("converts punctuation and spacing", () => {
