@@ -67,8 +67,14 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             return "cháng";
         case "得":
             nextTags = tag(afterText.join(""));
+            prevTags = tag(previousText.join(""));
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
+                let prevTag = prevTags.length && prevTags[prevTags.length - 1].tag
+                if (prevTag === "v") {
+                    break;
+                }
+
                 if (nextTags[0].word === "还" || nextTags[0].word === "還") {
                     if (nextTags[1] && nextTags[1].tag[0] === "r" || nextTags[1].tag[0] === "n") {
                         return "děi";
@@ -96,6 +102,12 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 return "háng";
             }
             break;
+        case "只":
+            let prev = tag(previousText.join("")).slice(-1)[0];
+            let after = tag(afterText.join(""))[0];
+            if (prev && prev.tag === "m") return "zhī";
+            if (after && after.tag === "n") return "zhī";
+            return "zhǐ";
     }
 }
 

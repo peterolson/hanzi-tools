@@ -40,16 +40,23 @@ describe("Pinyinify", () => {
         expect("我得去。").becomes("wǒ děi qù.");
         expect("我说得快。").becomes("wǒ shuō de kuài.");
         expect("你们觉得我画得怎么样？").becomes("nǐ​men jué​de wǒ huà de zěn​me​yàng?");
+        expect("喂，睡得还好吗？").becomes("wèi, shuì de hái​hǎo ma?");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
         expect("你还喜欢她吗？").becomes("nǐ hái xǐ​huan tā ma?");
         expect("你得还我的东西。").becomes("nǐ děi huán wǒ de dōng​xi.");
         expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
+        // 只
+        expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
 
         expect("行了吗？").becomes("xíng le ma?");
         expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
         expect("几行代码？两行代码。行还是不行？行！").becomes("jǐ háng dài​mǎ? liǎng háng dài​mǎ. xíng hái​shi bù​xíng? xíng!");
+
+        expect("结果").becomes("jiéguǒ");
+        expect("很美的运动。").becomes("hěn měi de yùn​dòng.");
+        expect("雪地上有好东西。").becomes("xuě​dì​ shàng yǒu hǎo dōng​xi.");
     });
 
     it("converts punctuation and spacing", () => {
