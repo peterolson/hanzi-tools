@@ -2,7 +2,8 @@ let segment = require("./segment"),
     pinyin = require("pinyin"),
     { pinyinDict } = require("./pinyinDict"),
     { normalizeEnglish } = require("./punctuation"),
-    tag = require("nodejieba").tag;
+    tag = require("./tag"),
+    { isCharacterText } = require("./util");
 
 function pinyinify(text, isDetailed) {
     let segments = segment(text);
@@ -62,6 +63,9 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             return "jué";
         case "长":
         case "長":
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length && nextTags[0].tag === "uz")
+                return "zhǎng";
             // zhǎng has higher frequency due to compond words, 
             // but cháng is more common as an individual character.
             return "cháng";
@@ -80,7 +84,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                         return "děi";
                     }
                 }
-                if (afterTag[0] === "t" || afterTag[0] === "v") {
+                if (afterTag[0] === "t" || afterTag[0] === "v" || afterTag[0] === "p") {
                     return "děi";
                 }
             }
@@ -90,6 +94,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             nextTags = tag(afterText.join(""));
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
+                if (afterText[0][0] === "有") break;
                 if (afterTag[0] === "r" || afterTag[0] === "n") {
                     return "huán";
                 }
@@ -109,11 +114,6 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             if (after && after.tag === "n") return "zhī";
             return "zhǐ";
     }
-}
-
-function isCharacterText(text) {
-    // https://stackoverflow.com/questions/21109011/javascript-unicode-string-chinese-character-but-no-punctuation
-    return /^([\u4E00-\u9FCC\u3400-\u4DB5\uFA0E\uFA0F\uFA11\uFA13\uFA14\uFA1F\uFA21\uFA23\uFA24\uFA27-\uFA29]|[\ud840-\ud868][\udc00-\udfff]|\ud869[\udc00-\uded6\udf00-\udfff]|[\ud86a-\ud86c][\udc00-\udfff]|\ud86d[\udc00-\udf34\udf40-\udfff]|\ud86e[\udc00-\udc1d])+$/.test(String(text));
 }
 
 function shouldPutSpaceBetween(word1, word2) {

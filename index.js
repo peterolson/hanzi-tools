@@ -1,12 +1,13 @@
 var pinyinify = require("./src/pinyinify"),
     segment = require("./src/segment"),
+    tag = require('./src/tag'),
     { simplify, traditionalize } = require("./src/simplify");
-let nodejieba = require("nodejieba");
+
 
 module.exports = {
     pinyinify,
     segment,
     simplify,
     traditionalize,
-    tag: nodejieba.tag
+    tag
 };
