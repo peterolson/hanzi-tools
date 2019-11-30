@@ -92,6 +92,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
         case "还":
         case "還":
             nextTags = tag(afterText.join(""));
+            console.log(nextTags);
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
                 if (afterText[0][0] === "有") break;

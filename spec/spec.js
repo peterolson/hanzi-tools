@@ -50,6 +50,7 @@ describe("Pinyinify", () => {
         expect("你得还我的东西。").becomes("nǐ děi huán wǒ de dōng​xi.");
         expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
         expect("好吧，我至少还有些朋友。").becomes("hǎo ba, wǒ zhì​shǎo hái yǒu​xiē péng​you.");
+        expect("你还爱我吗？").becomes("nǐ hái ài wǒ ma?");
         // 只
         expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
         // 长
