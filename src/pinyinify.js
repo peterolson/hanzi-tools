@@ -78,13 +78,16 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (prevTag === "v") {
                     break;
                 }
+                if (prevTag === "a" || prevTag === "b" || prevTag === "nr") {
+                    break;
+                }
 
                 if (nextTags[0].word === "还" || nextTags[0].word === "還") {
                     if (nextTags[1] && nextTags[1].tag[0] === "r" || nextTags[1].tag[0] === "n") {
                         return "děi";
                     }
                 }
-                if (afterTag[0] === "t" || afterTag[0] === "v" || afterTag[0] === "p") {
+                if (afterTag[0] === "t" || afterTag[0] === "v" || afterTag[0] === "p" || afterTag[0] === "l") {
                     return "děi";
                 }
             }
@@ -92,7 +95,6 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
         case "还":
         case "還":
             nextTags = tag(afterText.join(""));
-            console.log(nextTags);
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
                 if (afterText[0][0] === "有") break;
@@ -114,6 +116,25 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             if (prev && prev.tag === "m") return "zhī";
             if (after && after.tag === "n") return "zhī";
             return "zhǐ";
+        case "系":
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length) {
+                let afterTag = nextTags[0].tag;
+                if (afterTag === "f" || afterTag[0] === "u") return "jì";
+            }
+            return "xì";
+        case "地":
+            prevTags = tag(previousText.join(""));
+            nextTags = tag(afterText.join(""));
+            if (prevTags.length && prevTags[prevTags.length - 1].tag === "r") {
+                return "dì";
+            }
+        case "弹":
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length) {
+                let afterTag = nextTags[0].tag;
+                if (afterTag[0] === "n") return "tán";
+            }
     }
 }
 

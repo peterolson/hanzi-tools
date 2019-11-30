@@ -43,6 +43,7 @@ describe("Pinyinify", () => {
         expect("喂，睡得还好吗？").becomes("wèi, shuì de hái​hǎo ma?");
         expect("你得做个决定。").becomes("nǐ děi zuò gè jué​dìng.");
         expect("你得在这儿休息。").becomes("nǐ děi zài zhè​r xiū​xi.");
+        expect("我现在富得能买我想要的任何东西。").becomes("wǒ xiàn​zài fù de néng mǎi wǒ xiǎng​yào de rèn​hé dōng​xi.");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
@@ -55,6 +56,12 @@ describe("Pinyinify", () => {
         expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
         // 长
         expect("她长着一张圆脸和一双明亮的眼睛。").becomes("tā zhǎng zhe yī zhāng yuán liǎn hé yī shuāng míng​liàng de yǎn​jing.");
+        // 系
+        expect("这女孩要我给她把衣服从后面系上。").becomes("zhè nǚ​hái yào wǒ gěi tā bǎ yī​fu cóng hòu​miàn jì shàng.");
+        expect("一个人的后面有一个系着领带的男人走在道路上").becomes("yī gè rén de hòu​miàn yǒu yī gè jì zhe lǐng​dài de nán​rén zǒu zài dào​lù shàng");
+
+        // 地
+        expect("我说过我不会卖那块地的！").becomes("wǒ shuō guò wǒ bù​huì mài nà kuài dì de!");
 
         expect("行了吗？").becomes("xíng le ma?");
         expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
