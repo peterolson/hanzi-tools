@@ -67,7 +67,7 @@ describe("Pinyinify", () => {
         expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
         expect("几行代码？两行代码。行还是不行？行！").becomes("jǐ háng dài​mǎ? liǎng háng dài​mǎ. xíng hái​shi bù​xíng? xíng!");
 
-        expect("结果").becomes("jiéguǒ");
+        expect("结果").becomes("jié​guǒ");
         expect("很美的运动。").becomes("hěn měi de yùn​dòng.");
         expect("雪地上有好东西。").becomes("xuě​dì​ shàng yǒu hǎo dōng​xi.");
     });
