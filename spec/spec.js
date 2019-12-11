@@ -141,4 +141,7 @@ describe("Traditionalize", () => {
         expect(traditionalize("又在梦里见到你")).toEqual("又在夢裡見到你");
         expect(traditionalize("我只有三只狗。")).toEqual("我只有三隻狗。");
     });
+    it("chooses right ambiguous character", () => {
+        expect(traditionalize(`你对那个女的干了什么？`)).toEqual("你對那個女的幹了什麼？");
+    });
 });
