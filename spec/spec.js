@@ -44,6 +44,7 @@ describe("Pinyinify", () => {
         expect("你得做个决定。").becomes("nǐ děi zuò gè jué​dìng.");
         expect("你得在这儿休息。").becomes("nǐ děi zài zhè​r xiū​xi.");
         expect("我现在富得能买我想要的任何东西。").becomes("wǒ xiàn​zài fù de néng mǎi wǒ xiǎng​yào de rèn​hé dōng​xi.");
+        expect("我们就得这么做。").becomes("wǒ​men jiù děi zhè​me zuò.");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");

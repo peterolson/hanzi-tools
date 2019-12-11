@@ -81,6 +81,9 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (prevTag === "a" || prevTag === "b" || prevTag === "nr") {
                     break;
                 }
+                if (prevTag === "d") {
+                    return "děi";
+                }
 
                 if (nextTags[0].word === "还" || nextTags[0].word === "還") {
                     if (nextTags[1] && nextTags[1].tag[0] === "r" || nextTags[1].tag[0] === "n") {
