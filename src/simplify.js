@@ -9,7 +9,7 @@ function simplify(text) {
     }).join("");
 }
 
-const specialChars = new Set(["只", "喂"]);
+const specialChars = new Set(["只", "喂", "面"]);
 
 function traditionalize(text) {
     return segment(text).map((x, i, segments) => {
@@ -34,6 +34,10 @@ function traditionalizeSpecialChar(char, beforeText, afterText) {
             after = nodejieba.tag(afterText.join(""))[0];
             if (after && after.tag === "n") return "餵";
             return "喂";
+        case "面":
+            prev = nodejieba.tag(beforeText.join("")).slice(-1)[0];
+            if (prev && prev.tag === "v") return "麵";
+            return "面";
     }
     return char in s2tDict ? s2tDict[char] : char;
 }
