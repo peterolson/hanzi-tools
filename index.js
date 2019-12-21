@@ -1,7 +1,8 @@
 var pinyinify = require("./src/pinyinify"),
     segment = require("./src/segment"),
     tag = require('./src/tag'),
-    { simplify, traditionalize } = require("./src/simplify");
+    { simplify, traditionalize } = require("./src/simplify"),
+    { isCharacterText } = require("./src/util");
 
 
 module.exports = {
@@ -9,5 +10,6 @@ module.exports = {
     segment,
     simplify,
     traditionalize,
-    tag
+    tag,
+    isCharacterText
 };
