@@ -45,6 +45,7 @@ describe("Pinyinify", () => {
         expect("你得在这儿休息。").becomes("nǐ děi zài zhè​r xiū​xi.");
         expect("我现在富得能买我想要的任何东西。").becomes("wǒ xiàn​zài fù de néng mǎi wǒ xiǎng​yào de rèn​hé dōng​xi.");
         expect("我们就得这么做。").becomes("wǒ​men jiù děi zhè​me zuò.");
+        expect("你现在得把门打开。正在动手。").becomes("nǐ xiàn​zài děi bǎ​mén dǎ​kāi. zhèng​zài dòng​shǒu.");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
@@ -57,12 +58,20 @@ describe("Pinyinify", () => {
         expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
         // 长
         expect("她长着一张圆脸和一双明亮的眼睛。").becomes("tā zhǎng zhe yī zhāng yuán liǎn hé yī shuāng míng​liàng de yǎn​jing.");
+        expect("不是他干的，警长。").becomes("bù​shì tā gàn de, jǐng zhǎng.");
         // 系
         expect("这女孩要我给她把衣服从后面系上。").becomes("zhè nǚ​hái yào wǒ gěi tā bǎ yī​fu cóng hòu​miàn jì shàng.");
         expect("一个人的后面有一个系着领带的男人走在道路上").becomes("yī gè rén de hòu​miàn yǒu yī gè jì zhe lǐng​dài de nán​rén zǒu zài dào​lù shàng");
 
         // 地
         expect("我说过我不会卖那块地的！").becomes("wǒ shuō guò wǒ bù​huì mài nà kuài dì de!");
+        expect("一定要了解这些需求并明确地定义它们。").becomes("yī​dìng yào liǎo​jiě zhè​xiē xū​qiú bìng míng​què de dìng​yì tā​men.");
+
+        // 重
+        expect("我重入了房间并且去了工作。").becomes("wǒ chóng rù le fáng​jiān bìng​qiě qù le gōng​zuò.");
+
+        // 弹
+        expect("一个双手弹着吉他的男人在舞台上表演").becomes("yī gè shuāng​shǒu tán zhe jí​tā de nán​rén zài wǔ​tái shàng biǎo​yǎn");
 
         expect("行了吗？").becomes("xíng le ma?");
         expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
@@ -141,6 +150,7 @@ describe("Traditionalize", () => {
         expect(traditionalize("为为为是是哪里哪里")).toEqual("為為為是是哪裡哪裡");
         expect(traditionalize("又在梦里见到你")).toEqual("又在夢裡見到你");
         expect(traditionalize("我只有三只狗。")).toEqual("我只有三隻狗。");
+        expect(traditionalize("房间里有一个男人在给一个老人理头发")).toEqual("房間裡有一個男人在給一個老人理頭髮");
     });
     it("chooses right ambiguous character", () => {
         expect(traditionalize(`你对那个女的干了什么？`)).toEqual("你對那個女的幹了什麼？");

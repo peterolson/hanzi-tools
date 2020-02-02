@@ -63,9 +63,12 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             return "jué";
         case "长":
         case "長":
+            prevTags = tag(previousText.join(""));
             nextTags = tag(afterText.join(""));
             if (nextTags && nextTags.length && nextTags[0].tag === "uz")
                 return "zhǎng";
+            let prevTag = prevTags && prevTags.length && prevTags[prevTags.length - 1].tag;
+            if (prevTag === "n") return "zhǎng";
             // zhǎng has higher frequency due to compond words, 
             // but cháng is more common as an individual character.
             return "cháng";
@@ -90,7 +93,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                         return "děi";
                     }
                 }
-                if (afterTag[0] === "t" || afterTag[0] === "v" || afterTag[0] === "p" || afterTag[0] === "l") {
+                if (afterTag[0] === "t" || afterTag[0] === "v" || afterTag[0] === "p" || afterTag[0] === "l" || afterTag[0] === "n") {
                     return "děi";
                 }
             }
@@ -132,12 +135,22 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             if (prevTags.length && prevTags[prevTags.length - 1].tag === "r") {
                 return "dì";
             }
+            break;
         case "弹":
             nextTags = tag(afterText.join(""));
+            if (afterText.includes("吉他")) return "tán";
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
                 if (afterTag[0] === "n") return "tán";
             }
+            break;
+        case "重":
+            nextTags = tag(afterText.join(""));
+            if (nextTags && nextTags.length) {
+                let afterTag = nextTags[0].tag;
+                if (afterTag[0] === "v") return "chóng";
+            }
+            break;
     }
 }
 

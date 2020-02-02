@@ -9,7 +9,7 @@ function simplify(text) {
     }).join("");
 }
 
-const specialChars = new Set(["只", "喂", "面"]);
+const specialChars = new Set(["只", "喂", "面", "发"]);
 
 function traditionalize(text) {
     return segment(text).map((x, i, segments) => {
@@ -38,6 +38,10 @@ function traditionalizeSpecialChar(char, beforeText, afterText) {
             prev = nodejieba.tag(beforeText.join("")).slice(-1)[0];
             if (prev && prev.tag === "v") return "麵";
             return "面";
+        case "发":
+            let last2 = beforeText.join("").slice(-2);
+            if (last2.includes("理") || last2.includes("头")) return "髮";
+            return "發";
     }
     return char in s2tDict ? s2tDict[char] : char;
 }
