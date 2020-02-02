@@ -143,13 +143,17 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
 
 function shouldPutSpaceBetween(word1, word2) {
     if (!word2) return false;
+    if (word2 === " ") return false;
     if (isCharacterText(word1) && isCharacterText(word2)) return true;
     if (isCharacterText(word1) && /[ `"'“‘\(\[（【0-9]/.test(word2)) return true;
+    if (/[`"'“‘\(\[（【]/.test(word1)) return false;
     let punctuationPattern = /[0-9\.\?\!\)\]\}！？，。：；’”）%~\@\#\^\&\*]/;
     let numberPattern = /[0-9]/;
     if (numberPattern.test(word1) && numberPattern.test(word2)) return false;
     if (punctuationPattern.test(word1) && !punctuationPattern.test(word2)) return true;
     if (punctuationPattern.test(word1) && numberPattern.test(word2)) return true;
+    if (isCharacterText(word1) && punctuationPattern.test(word2)) return false;
+    if (isCharacterText(word1) !== isCharacterText(word2)) return true;
     return false;
 
 }

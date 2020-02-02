@@ -84,7 +84,7 @@ describe("Pinyinify", () => {
 
     it("doesn't mangle numbers or non-Chinese text", () => {
         expect("我有2个。他有540！50%的意思是百分之五十。").becomes("wǒ yǒu 2 gè. tā yǒu 540! 50% de yì​si shì bǎi​fēn​zhī wǔ​shí.");
-        expect("我叫Dr. Smith。他是Señor López。他是Владимир Влидимирович给我们介绍的。", "wǒ jiào Dr. Smith. tā shì Señor López. tā shì Владимир Влидимирович gěi wǒmen jièshào de.");
+        expect("我叫Dr. Smith。他是Señor López。他是Владимир Влидимирович给我们介绍的。").becomes("wǒ jiào Dr. Smith. tā shì Señor López. tā shì Владимир Влидимирович gěi wǒ​men jiè​shào de.");
     });
 
     it("preserves spaces in input", () => {
