@@ -59,6 +59,8 @@ describe("Pinyinify", () => {
         // 长
         expect("她长着一张圆脸和一双明亮的眼睛。").becomes("tā zhǎng zhe yī zhāng yuán liǎn hé yī shuāng míng​liàng de yǎn​jing.");
         expect("不是他干的，警长。").becomes("bù​shì tā gàn de, jǐng zhǎng.");
+        expect("你的头发太长了。").becomes("nǐ de tóu​fa tài cháng le.");
+        expect("我后背上长了个东西。").becomes("wǒ hòu bèi shàng zhǎng le gè dōng​xi.");
         // 系
         expect("这女孩要我给她把衣服从后面系上。").becomes("zhè nǚ​hái yào wǒ gěi tā bǎ yī​fu cóng hòu​miàn jì shàng.");
         expect("一个人的后面有一个系着领带的男人走在道路上").becomes("yī gè rén de hòu​miàn yǒu yī gè jì zhe lǐng​dài de nán​rén zǒu zài dào​lù shàng");

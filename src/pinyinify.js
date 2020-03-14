@@ -65,10 +65,14 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
         case "長":
             prevTags = tag(previousText.join(""));
             nextTags = tag(afterText.join(""));
-            if (nextTags && nextTags.length && nextTags[0].tag === "uz")
+            let nextTag = nextTags && nextTags.length && nextTags[0].tag;
+            if (nextTag === "uz")
                 return "zhǎng";
             let prevTag = prevTags && prevTags.length && prevTags[prevTags.length - 1].tag;
             if (prevTag === "n") return "zhǎng";
+            if (prevTag !== "d" && nextTag === "ul") {
+                return "zhǎng";
+            }
             // zhǎng has higher frequency due to compond words, 
             // but cháng is more common as an individual character.
             return "cháng";
