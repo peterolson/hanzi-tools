@@ -75,6 +75,9 @@ describe("Pinyinify", () => {
         // 弹
         expect("一个双手弹着吉他的男人在舞台上表演").becomes("yī gè shuāng​shǒu tán zhe jí​tā de nán​rén zài wǔ​tái shàng biǎo​yǎn");
 
+
+
+
         expect("行了吗？").becomes("xíng le ma?");
         expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
         expect("几行代码？两行代码。行还是不行？行！").becomes("jǐ háng dài​mǎ? liǎng háng dài​mǎ. xíng hái​shi bù​xíng? xíng!");
@@ -156,5 +159,7 @@ describe("Traditionalize", () => {
     });
     it("chooses right ambiguous character", () => {
         expect(traditionalize(`你对那个女的干了什么？`)).toEqual("你對那個女的幹了什麼？");
+        // 干
+        expect(traditionalize("你没把面包包好，它变干了。")).toEqual("你沒把麵包包好，它變乾了。");
     });
 });
