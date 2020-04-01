@@ -88,7 +88,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (prevTag === "a" || prevTag === "b" || prevTag === "nr") {
                     break;
                 }
-                if (prevTag === "d") {
+                if (prevTag === "d" || prevTag === "r") {
                     return "děi";
                 }
 
