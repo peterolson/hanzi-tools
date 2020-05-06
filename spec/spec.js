@@ -47,6 +47,7 @@ describe("Pinyinify", () => {
         expect("我们就得这么做。").becomes("wǒ​men jiù děi zhè​me zuò.");
         expect("你现在得把门打开。正在动手。").becomes("nǐ xiàn​zài děi bǎ​mén dǎ​kāi. zhèng​zài dòng​shǒu.");
         expect("听着，我得先见见这人").becomes("tīng zhe, wǒ děi xiān jiàn jiàn zhè rén");
+        expect("我得了什么病？").becomes("wǒ dé le shén​me bìng?");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
@@ -55,6 +56,7 @@ describe("Pinyinify", () => {
         expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
         expect("好吧，我至少还有些朋友。").becomes("hǎo ba, wǒ zhì​shǎo hái yǒu​xiē péng​you.");
         expect("你还爱我吗？").becomes("nǐ hái ài wǒ ma?");
+        expect("把我小孩还来！").becomes("bǎ wǒ xiǎo​hái huán lái!");
         // 只
         expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
         // 长
@@ -162,5 +164,8 @@ describe("Traditionalize", () => {
         expect(traditionalize(`你对那个女的干了什么？`)).toEqual("你對那個女的幹了什麼？");
         // 干
         expect(traditionalize("你没把面包包好，它变干了。")).toEqual("你沒把麵包包好，它變乾了。");
+        // 面
+        expect(traditionalize("房间里有一个坐着的男人看着一个在吃面的男人")).toEqual("房間裡有一個坐著的男人看著一個在吃麵的男人");
+        expect(traditionalize("我吃面。")).toEqual("我吃麵。");
     });
 });

@@ -88,6 +88,9 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (prevTag === "a" || prevTag === "b" || prevTag === "nr") {
                     break;
                 }
+                if (afterTag === "ul") {
+                    return "dé";
+                }
                 if (prevTag === "d" || prevTag === "r") {
                     return "děi";
                 }
@@ -104,6 +107,7 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
             break;
         case "还":
         case "還":
+            if (previousText.join("").includes("把")) return "huán";
             nextTags = tag(afterText.join(""));
             if (nextTags && nextTags.length) {
                 let afterTag = nextTags[0].tag;
