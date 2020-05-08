@@ -5,6 +5,14 @@ let segment = require("./segment"),
     tag = require("./tag"),
     { isCharacterText } = require("./util");
 
+const tones = [
+    ['ā','ē','ī','ō','ū','ǖ','Ā','Ē','Ī','Ō','Ū','Ǖ'],
+    ['á','é','í','ó','ú','ǘ','Á','É','Í','Ó','Ú','Ǘ'],
+    ['ǎ','ě','ǐ','ǒ','ǔ','ǚ','Ǎ','Ě','Ǐ','Ǒ','Ǔ','Ǚ'],
+    ['à','è','ì','ò','ù','ǜ','À','È','Ì','Ò','Ù','Ǜ'],
+    ['a','e','i','o','u','ü','A','E','I','O','U','Ü']
+]; //Use tones[tone - 1] to get all possible characters with that tone
+
 function pinyinify(text, isDetailed) {
     let segments = segment(text);
     let pinyinSegments = [];
@@ -159,6 +167,19 @@ function decideAmbiguousChar(char, cuts, cutIndex) {
                 if (afterTag[0] === "v") return "chóng";
             }
             break;
+        case "不":
+            if (afterText.length > 0) {
+                const nextTone = getTone(afterText[0].charAt(0));
+                if (nextTone === 4) return "bú";
+            }
+            break;
+        case "一":
+            if (afterText.length > 0) {
+                const nextTone = getTone(afterText[0].charAt(0));
+                if (nextTone === 1 || nextTone == 2 || nextTone == 3) return "yì";
+                else if (nextTone == 4) return "yí";
+            }
+            break;
     }
 }
 
@@ -176,7 +197,16 @@ function shouldPutSpaceBetween(word1, word2) {
     if (isCharacterText(word1) && punctuationPattern.test(word2)) return false;
     if (isCharacterText(word1) !== isCharacterText(word2)) return true;
     return false;
+}
 
+function getTone(char) {
+    if(typeof pinyinDict[char] === 'undefined') return 0;
+
+    const pinyinChars = [...pinyinDict[char]]; //Getting and destructuring the pinyin string
+    for (i = 0; i < 4; i++) { //Going through the four tones and checking if there is a match
+        if (tones[i].some(c => pinyinChars.includes(c))) return i + 1;
+    }
+    return 5;
 }
 
 module.exports = pinyinify;
