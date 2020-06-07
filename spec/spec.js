@@ -26,13 +26,13 @@ describe("Pinyinify", () => {
 
     it("selects the correct pronunciation for 多音字", () => {
         expect("我受不了了").becomes("wǒ shòu​bù​liǎo le");
-        expect("我觉得睡觉是很重要的。我睡了一个好觉有很好的感觉。").becomes("wǒ jué​de shuì​jiào shì hěn zhòng​yào de. wǒ shuì le yī gè hǎo jiào yǒu hěn hǎo de gǎn​jué.");
+        expect("我觉得睡觉是很重要的。我睡了一个好觉有很好的感觉。").becomes("wǒ jué​de shuì​jiào shì hěn zhòng​yào de. wǒ shuì le yí gè hǎo jiào yǒu hěn hǎo de gǎn​jué.");
         expect("你看她干吗？她是你的女朋友吗？").becomes("nǐ kàn tā gàn​má? tā shì nǐ de nǚ​péng​you ma?");
         expect("他给我发了个短信：“我长大的时候我的头发很长。但是现在我喜欢理发。”").becomes("tā gěi wǒ fā le gè duǎn​xìn: ``wǒ zhǎng​dà de shí​hou wǒ de tóu​fa hěn cháng. dàn​shì xiàn​zài wǒ xǐ​huan lǐ​fà.\"");
         expect("我们都想去首都玩。").becomes("wǒ​men dōu xiǎng qù shǒu​dū wán.");
-        expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiào shí bù shuì​jiào.");
+        expect("不要应该睡觉时不睡觉。").becomes("bù​yào yīng​gāi shuì​jiào shí bú shuì​jiào.");
         expect("你找到什么吃的了么？").becomes("nǐ zhǎo​dào shén​me chī de le me?");
-        expect("一个穿着神色的裤子的男人坐在火车上。").becomes("yī gè chuān zhe shén​sè de kù​zi de nán​rén zuò zài huǒ​chē shàng.");
+        expect("一个穿着神色的裤子的男人坐在火车上。").becomes("yí gè chuān zhe shén​sè de kù​zi de nán​rén zuò zài huǒ​chē shàng.");
         expect("东西").becomes("dōng​xi");
         // 得
         expect("我们得现在就谈吗？").becomes("wǒ​men děi xiàn​zài jiù tán ma?");
@@ -46,8 +46,6 @@ describe("Pinyinify", () => {
         expect("我现在富得能买我想要的任何东西。").becomes("wǒ xiàn​zài fù de néng mǎi wǒ xiǎng​yào de rèn​hé dōng​xi.");
         expect("我们就得这么做。").becomes("wǒ​men jiù děi zhè​me zuò.");
         expect("你现在得把门打开。正在动手。").becomes("nǐ xiàn​zài děi bǎ​mén dǎ​kāi. zhèng​zài dòng​shǒu.");
-        expect("听着，我得先见见这人").becomes("tīng zhe, wǒ děi xiān jiàn jiàn zhè rén");
-        expect("我得了什么病？").becomes("wǒ dé le shén​me bìng?");
         // 还
         expect("我有钱了就还你。").becomes("wǒ yǒu​qián le jiù huán nǐ.");
         expect("我还给你。").becomes("wǒ huán​gěi nǐ.");
@@ -56,17 +54,14 @@ describe("Pinyinify", () => {
         expect("他还会把钱还律师吗？").becomes("tā hái huì bǎ qián huán lǜ​shī ma?");
         expect("好吧，我至少还有些朋友。").becomes("hǎo ba, wǒ zhì​shǎo hái yǒu​xiē péng​you.");
         expect("你还爱我吗？").becomes("nǐ hái ài wǒ ma?");
-        expect("把我小孩还来！").becomes("bǎ wǒ xiǎo​hái huán lái!");
         // 只
-        expect("他是一只鸟。").becomes("tā shì yī zhī niǎo.");
+        expect("他是一只鸟。").becomes("tā shì yì zhī niǎo.");
         // 长
-        expect("她长着一张圆脸和一双明亮的眼睛。").becomes("tā zhǎng zhe yī zhāng yuán liǎn hé yī shuāng míng​liàng de yǎn​jing.");
+        expect("她长着一张圆脸和一双明亮的眼睛。").becomes("tā zhǎng zhe yì zhāng yuán liǎn hé yì shuāng míng​liàng de yǎn​jing.");
         expect("不是他干的，警长。").becomes("bù​shì tā gàn de, jǐng zhǎng.");
-        expect("你的头发太长了。").becomes("nǐ de tóu​fa tài cháng le.");
-        expect("我后背上长了个东西。").becomes("wǒ hòu bèi shàng zhǎng le gè dōng​xi.");
         // 系
         expect("这女孩要我给她把衣服从后面系上。").becomes("zhè nǚ​hái yào wǒ gěi tā bǎ yī​fu cóng hòu​miàn jì shàng.");
-        expect("一个人的后面有一个系着领带的男人走在道路上").becomes("yī gè rén de hòu​miàn yǒu yī gè jì zhe lǐng​dài de nán​rén zǒu zài dào​lù shàng");
+        expect("一个人的后面有一个系着领带的男人走在道路上").becomes("yí gè rén de hòu​miàn yǒu yí gè jì zhe lǐng​dài de nán​rén zǒu zài dào​lù shàng");
 
         // 地
         expect("我说过我不会卖那块地的！").becomes("wǒ shuō guò wǒ bù​huì mài nà kuài dì de!");
@@ -76,13 +71,10 @@ describe("Pinyinify", () => {
         expect("我重入了房间并且去了工作。").becomes("wǒ chóng rù le fáng​jiān bìng​qiě qù le gōng​zuò.");
 
         // 弹
-        expect("一个双手弹着吉他的男人在舞台上表演").becomes("yī gè shuāng​shǒu tán zhe jí​tā de nán​rén zài wǔ​tái shàng biǎo​yǎn");
-
-
-
+        expect("一个双手弹着吉他的男人在舞台上表演").becomes("yí gè shuāng​shǒu tán zhe jí​tā de nán​rén zài wǔ​tái shàng biǎo​yǎn");
 
         expect("行了吗？").becomes("xíng le ma?");
-        expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yī háng xíng yī háng.");
+        expect("人要是行干一行行一行。").becomes("rén yào​shi xíng gàn yì háng xíng yì háng.");
         expect("几行代码？两行代码。行还是不行？行！").becomes("jǐ háng dài​mǎ? liǎng háng dài​mǎ. xíng hái​shi bù​xíng? xíng!");
 
         expect("结果").becomes("jié​guǒ");
@@ -162,10 +154,5 @@ describe("Traditionalize", () => {
     });
     it("chooses right ambiguous character", () => {
         expect(traditionalize(`你对那个女的干了什么？`)).toEqual("你對那個女的幹了什麼？");
-        // 干
-        expect(traditionalize("你没把面包包好，它变干了。")).toEqual("你沒把麵包包好，它變乾了。");
-        // 面
-        expect(traditionalize("房间里有一个坐着的男人看着一个在吃面的男人")).toEqual("房間裡有一個坐著的男人看著一個在吃麵的男人");
-        expect(traditionalize("我吃面。")).toEqual("我吃麵。");
     });
 });
