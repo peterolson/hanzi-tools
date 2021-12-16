@@ -26,8 +26,8 @@
     "分词"
   ],
   "dependencies": {
-    "nodejieba": "^2.3.0",
-    "pinyin": "^2.8.0"
+    "nodejieba": "^2.5.2",
+    "pinyin": "^2.10.2"
   },
   "devDependencies": {
     "jasmine": "^2.99.0"
