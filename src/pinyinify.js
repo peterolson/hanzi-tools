@@ -1,5 +1,5 @@
 let segment = require("./segment"),
-    pinyin = require("pinyin"),
+    { pinyin } = require("pinyin"),
     { pinyinDict } = require("./pinyinDict"),
     { normalizeEnglish } = require("./punctuation"),
     tag = require("./tag"),
